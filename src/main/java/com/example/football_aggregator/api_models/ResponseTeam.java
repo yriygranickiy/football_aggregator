@@ -1,13 +1,11 @@
 package com.example.football_aggregator.api_models;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 public class ResponseTeam {
 
     private String name;

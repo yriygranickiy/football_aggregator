@@ -3,12 +3,10 @@ package com.example.football_aggregator.entity;
 
 import lombok.*;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
-@ToString
 @AllArgsConstructor
-public class TeamInfo {
+public class ResponseCommand {
 
     private Team team;
 

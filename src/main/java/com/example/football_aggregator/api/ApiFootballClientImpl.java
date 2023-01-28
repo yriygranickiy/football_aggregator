@@ -1,8 +1,7 @@
 package com.example.football_aggregator.api;
 
 
-import com.example.football_aggregator.api_models.ResponseTeam;
-import com.example.football_aggregator.entity.TeamInfo;
+import com.example.football_aggregator.entity.ResponseCommand;
 import com.example.football_aggregator.exception.ApiRequestException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -23,10 +22,10 @@ public class ApiFootballClientImpl extends FootballApiClient {
 
 
     @Override
-    public List<TeamInfo> getTeam(Map<String,String> param){
+    public List<ResponseCommand> getTeam(Map<String,String> param){
         String result = "";
         String responseTeam = "";
-        List<TeamInfo> teamInfoList = new ArrayList<>();
+        List<ResponseCommand> responseCommandList = new ArrayList<>();
 
         Request request = buildRequest("/teams"+ buildQueryParam(param));
 
@@ -43,17 +42,17 @@ public class ApiFootballClientImpl extends FootballApiClient {
 
             responseTeam = node.get("response").toString();
 
-            teamInfoList = mapper.readValue(responseTeam, new TypeReference<List<TeamInfo>>() {});
+            responseCommandList = mapper.readValue(responseTeam, new TypeReference<List<ResponseCommand>>() {});
 
-            if(teamInfoList.isEmpty()){
+            if(responseCommandList.isEmpty()){
                 throw new ApiRequestException("this team not found");
             }else {
-               return teamInfoList;
+               return responseCommandList;
             }
         } catch (IOException e) {
            e.getMessage();
         }
-        return  teamInfoList;
+        return responseCommandList;
     }
 
     private String buildQueryParam(Map<String,String> params){

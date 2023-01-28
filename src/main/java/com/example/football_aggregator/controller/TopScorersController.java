@@ -43,14 +43,13 @@ public class TopScorersController {
 
     }
 
-
-    @GetMapping(value = ("/player"))
-    public ResponseEntity<Object> searchPlayer(@RequestParam ResponsePlayer responsePlayer) {
-
-
-        return new ResponseEntity<>(playerService.findPlayer(),HttpStatus.OK);
-
-
-    }
+//
+//    @GetMapping(value = ("/player"))
+//    public ResponseEntity<Object> searchPlayer(@RequestParam ResponsePlayer responsePlayer) {
+//
+//        return new ResponseEntity<>(playerService.findPlayer(),HttpStatus.OK);
+//
+//
+//    }
 
 }

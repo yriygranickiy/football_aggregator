@@ -1,15 +1,11 @@
 package com.example.football_aggregator.entity;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Setter
-@Getter
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Venue {
 
     private String name;
