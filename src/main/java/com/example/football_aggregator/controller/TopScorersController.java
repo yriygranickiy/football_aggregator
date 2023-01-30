@@ -1,6 +1,5 @@
 package com.example.football_aggregator.controller;
 
-import com.example.football_aggregator.api_models.ResponsePlayer;
 import com.example.football_aggregator.api_models.ResponseTeam;
 import com.example.football_aggregator.service.PlayerService;
 import com.example.football_aggregator.service.TeamService;
@@ -8,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -29,27 +27,19 @@ public class TopScorersController {
         this.playerService = playerService;
     }
 
-    @GetMapping(value = ("/team-league/{id}"))
-    public ResponseEntity<List<ResponseTeam>> getTeamLeague(@PathVariable("id") String id) {
+    @GetMapping(value = ("/team-league/{country}"))
+    public ResponseEntity<List<ResponseTeam>> getTeamLeague(@PathVariable("country") String country) {
 
         Map<String, String> params = new HashMap<>();
 
-        params.put("id", id);
+        params.put("country", country);
 
-        List<ResponseTeam> respone =  topScorersService.getTeam(params);
+        List<ResponseTeam> response = topScorersService.getTeam(params);
 
-        return new ResponseEntity<>(respone,HttpStatus.OK);
-
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
-//
-//    @GetMapping(value = ("/player"))
-//    public ResponseEntity<Object> searchPlayer(@RequestParam ResponsePlayer responsePlayer) {
-//
-//        return new ResponseEntity<>(playerService.findPlayer(),HttpStatus.OK);
-//
-//
-//    }
+
 
 }

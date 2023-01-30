@@ -2,8 +2,10 @@ package com.example.football_aggregator.mappers;
 
 import com.example.football_aggregator.api_models.ResponseTeam;
 import com.example.football_aggregator.entity.ResponseCommand;
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -20,6 +22,5 @@ public interface FootballTeamMapper {
     @Mapping(target = "stadium.address", expression = "java(responseCommand.getVenue().getAddress())")
     @Mapping(target = "stadium.city", expression = "java(responseCommand.getVenue().getCity())")
     @Mapping(target = "stadium.capacity", expression = "java(responseCommand.getVenue().getCapacity())")
-    List<ResponseTeam> convertTeam(List<ResponseCommand> responseCommand);
-
+    ResponseTeam convertTeam(ResponseCommand responseCommand);
 }
