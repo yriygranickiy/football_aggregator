@@ -36,7 +36,7 @@ public class TeamServiceImpl implements TeamService {
         List<ResponseTeam> responseTeams = collect.stream()
                 .map(FootballTeamMapper.INSTANCE::convertTeam)
                 .collect(Collectors.toList());
-        
+
         return responseTeams;
 
     }
