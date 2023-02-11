@@ -3,6 +3,7 @@ package com.example.football_aggregator.api;
 
 import com.example.football_aggregator.entity.ResponseCommand;
 import com.example.football_aggregator.exception.ApiRequestException;
+import com.example.football_aggregator.utill.UtillitiesParam;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -12,14 +13,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 
 @SuperBuilder
 public class ApiFootballClientImpl extends FootballApiClient {
-
-    //"https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=39&season=2021"
-
 
     @Override
     public List<ResponseCommand> getTeam(Map<String,String> param){
@@ -27,7 +28,7 @@ public class ApiFootballClientImpl extends FootballApiClient {
         String responseTeam = "";
         List<ResponseCommand> responseCommandList = new ArrayList<>();
 
-        Request request = buildRequest("/teams"+ buildQueryParam(param));
+        Request request = buildRequest("/teams"+ UtillitiesParam.buildQueryParam(param));
 
         try {
             Response response = client.newCall(request).execute();
@@ -55,12 +56,4 @@ public class ApiFootballClientImpl extends FootballApiClient {
         return responseCommandList;
     }
 
-    private String buildQueryParam(Map<String,String> params){
-
-        StringBuilder sb = new StringBuilder("?");
-
-        params.forEach((k,v) -> sb.append(k).append("=").append(v).append("&"));
-
-        return sb.toString();
-    }
 }
