@@ -23,8 +23,6 @@ import java.util.Objects;
 @SuperBuilder
 public  class FootballProTeamClientImpl  extends FootballApiClient {
 
-    String path = "/Users/urijgranickij/Downloads/football_aggregator/src/main/java/com/example/football_aggregator";
-
     @Override
     public List<? extends ResponseApiTeam> getTeam(Map<String,String> param){
 
@@ -33,9 +31,6 @@ public  class FootballProTeamClientImpl  extends FootballApiClient {
         String responseList = "";
 
         List<FootballProResponseApiTeam> responseCommandList = new ArrayList<>();
-
-//        Request request = buildRequest("/teams/search"+ UtillitiesParam
-//                .buildParam(param));
 
         Request request = buildRequest("/teams/search"+ UtillitiesParam
                 .buildParam(param));
@@ -54,7 +49,6 @@ public  class FootballProTeamClientImpl  extends FootballApiClient {
             responseList = node.path("data").toString();
 
             responseCommandList = mapper.readValue(responseList, new TypeReference<List<FootballProResponseApiTeam>>() {});
-//            responseCommandList = mapper.readValue(responseList, new TypeReference<List<ResponseDataTeam>>() {});
 
             if(responseCommandList.isEmpty()){
                 throw new ApiRequestException("this team not found");
