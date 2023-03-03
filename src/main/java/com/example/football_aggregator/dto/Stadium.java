@@ -1,4 +1,4 @@
-package com.example.football_aggregator.api_models;
+package com.example.football_aggregator.dto;
 
 
 import lombok.AllArgsConstructor;

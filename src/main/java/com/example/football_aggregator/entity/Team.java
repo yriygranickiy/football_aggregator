@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Team {
 
-    private Integer id;
+    private Long id;
 
     private String name;
 
     private String country;
 
+    private int founded;
 }

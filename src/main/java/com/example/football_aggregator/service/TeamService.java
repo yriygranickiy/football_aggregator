@@ -2,7 +2,7 @@ package com.example.football_aggregator.service;
 
 
 
-import com.example.football_aggregator.api_models.ResponseTeam;
+import com.example.football_aggregator.dto.ResponseTeam;
 
 import java.util.List;
 import java.util.Map;

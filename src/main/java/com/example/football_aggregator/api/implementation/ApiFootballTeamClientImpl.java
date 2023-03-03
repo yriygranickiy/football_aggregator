@@ -1,7 +1,9 @@
-package com.example.football_aggregator.api;
+package com.example.football_aggregator.api.implementation;
 
 
-import com.example.football_aggregator.entity.ResponseCommand;
+import com.example.football_aggregator.api.FootballApiClient;
+import com.example.football_aggregator.entity.ApiFootballResponseApiTeam;
+import com.example.football_aggregator.entity.ResponseApiTeam;
 import com.example.football_aggregator.exception.ApiRequestException;
 import com.example.football_aggregator.utill.UtillitiesParam;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -20,13 +22,16 @@ import java.util.Objects;
 
 
 @SuperBuilder
-public class ApiFootballClientImpl extends FootballApiClient {
+public class ApiFootballTeamClientImpl extends FootballApiClient {
 
     @Override
-    public List<ResponseCommand> getTeam(Map<String,String> param){
+    public List<? extends ResponseApiTeam> getTeam(Map<String,String> param){
+
         String result = "";
+
         String responseTeam = "";
-        List<ResponseCommand> responseCommandList = new ArrayList<>();
+
+        List<ApiFootballResponseApiTeam> apiFootballResponseApiTeamList = new ArrayList<>();
 
         Request request = buildRequest("/teams"+ UtillitiesParam.buildQueryParam(param));
 
@@ -43,17 +48,29 @@ public class ApiFootballClientImpl extends FootballApiClient {
 
             responseTeam = node.get("response").toString();
 
-            responseCommandList = mapper.readValue(responseTeam, new TypeReference<List<ResponseCommand>>() {});
+            apiFootballResponseApiTeamList = mapper.readValue(responseTeam, new TypeReference<List<ApiFootballResponseApiTeam>>() {});
 
-            if(responseCommandList.isEmpty()){
+
+            if(apiFootballResponseApiTeamList.isEmpty()){
                 throw new ApiRequestException("this team not found");
             }else {
-               return responseCommandList;
+               return apiFootballResponseApiTeamList;
             }
         } catch (IOException e) {
            e.getMessage();
         }
-        return responseCommandList;
+        return apiFootballResponseApiTeamList;
     }
+
+    protected Request buildRequest(String param) {
+        return new Request
+                .Builder()
+                .url(buildUrl("v3")+param)
+                .get()
+                .addHeader("X-RapidAPI-Key", apiKey)
+                .addHeader("X-RapidAPI-Host", host)
+                .build();
+    }
+
 
 }

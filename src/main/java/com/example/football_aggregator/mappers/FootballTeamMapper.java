@@ -1,14 +1,12 @@
 package com.example.football_aggregator.mappers;
 
-import com.example.football_aggregator.api_models.ResponseTeam;
-import com.example.football_aggregator.entity.ResponseCommand;
-import org.mapstruct.IterableMapping;
+import com.example.football_aggregator.entity.ApiFootballResponseApiTeam;
+import com.example.football_aggregator.entity.FootballProResponseApiTeam;
+import com.example.football_aggregator.entity.ResponseApiTeam;
+import com.example.football_aggregator.dto.ResponseTeam;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 @Mapper
 public interface FootballTeamMapper {
@@ -16,11 +14,26 @@ public interface FootballTeamMapper {
     FootballTeamMapper INSTANCE = Mappers.getMapper(FootballTeamMapper.class);
 
 
-    @Mapping(target = "name", expression = "java(responseCommand.getTeam().getName())")
-    @Mapping(target = "country", expression = "java(responseCommand.getTeam().getCountry())")
-    @Mapping(target = "stadium.name", expression = "java(responseCommand.getVenue().getName())")
-    @Mapping(target = "stadium.address", expression = "java(responseCommand.getVenue().getAddress())")
-    @Mapping(target = "stadium.city", expression = "java(responseCommand.getVenue().getCity())")
-    @Mapping(target = "stadium.capacity", expression = "java(responseCommand.getVenue().getCapacity())")
-    ResponseTeam convertTeam(ResponseCommand responseCommand);
+    @Mapping(target = "id",expression = "java(apiFootballResponseApiTeam.getTeam().getId())")
+    @Mapping(target = "name", expression = "java(apiFootballResponseApiTeam.getTeam().getName())")
+    @Mapping(target = "country", expression = "java(apiFootballResponseApiTeam.getTeam().getCountry())")
+    @Mapping(target = "founded", expression = "java(apiFootballResponseApiTeam.getTeam().getFounded())")
+    @Mapping(target = "stadium.name", expression = "java(apiFootballResponseApiTeam.getVenue().getName())")
+    @Mapping(target = "stadium.address", expression = "java(apiFootballResponseApiTeam.getVenue().getAddress())")
+    @Mapping(target = "stadium.city", expression = "java(apiFootballResponseApiTeam.getVenue().getCity())")
+    @Mapping(target = "stadium.capacity", expression = "java(apiFootballResponseApiTeam.getVenue().getCapacity())")
+    ResponseTeam convertResponseTeam(ApiFootballResponseApiTeam apiFootballResponseApiTeam);
+
+
+
+    ResponseTeam convertResponseDataTeam(FootballProResponseApiTeam footballProResponseApiTeam);
+
+    default ResponseTeam convertTeam(ResponseApiTeam team) {
+        if (team instanceof ApiFootballResponseApiTeam) {
+            return convertResponseTeam((ApiFootballResponseApiTeam) team);
+      }else if(team instanceof FootballProResponseApiTeam){
+            return convertResponseDataTeam((FootballProResponseApiTeam) team);
+        }
+        return null;
+    }
 }

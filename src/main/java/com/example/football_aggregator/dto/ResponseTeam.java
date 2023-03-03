@@ -1,4 +1,4 @@
-package com.example.football_aggregator.api_models;
+package com.example.football_aggregator.dto;
 
 
 import lombok.*;
@@ -8,9 +8,13 @@ import lombok.*;
 @NoArgsConstructor
 public class ResponseTeam {
 
+    private Long id;
+
     private String name;
 
     private String country;
+
+    private int founded;
 
     private Stadium stadium;
 
