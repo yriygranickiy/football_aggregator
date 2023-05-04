@@ -1,12 +1,14 @@
-package com.example.football_aggregator.entity;
+package com.example.football_aggregator.dto;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Venue {
+public class Stadium {
 
     private String name;
 
@@ -15,5 +17,4 @@ public class Venue {
     private String city;
 
     private int capacity;
-
 }

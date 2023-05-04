@@ -1,0 +1,153 @@
+{
+  "data": [
+    {
+      "id": 8,
+      "legacy_id": 119,
+      "name": "Liverpool",
+      "short_code": "LIV",
+      "twitter": "@LFC",
+      "country_id": 462,
+      "national_team": false,
+      "founded": 1892,
+      "logo_path": "https://cdn.sportmonks.com/images/soccer/teams/8/8.png",
+      "venue_id": 230,
+      "current_season_id": 19734,
+      "is_placeholder": false
+    },
+    {
+      "id": 976,
+      "legacy_id": null,
+      "name": "Liverpool",
+      "short_code": "LIV",
+      "twitter": "@LFC",
+      "country_id": 158,
+      "national_team": false,
+      "founded": 1915,
+      "logo_path": "https://cdn.sportmonks.com/images/soccer/teams/16/976.png",
+      "venue_id": 364,
+      "current_season_id": 21140,
+      "is_placeholder": false
+    },
+    {
+      "id": 1451,
+      "legacy_id": 8813,
+      "name": "Liverpool U23",
+      "short_code": "LIV",
+      "twitter": null,
+      "country_id": 462,
+      "national_team": false,
+      "founded": null,
+      "logo_path": "https://cdn.sportmonks.com/images/soccer/teams/11/1451.png",
+      "venue_id": 990,
+      "current_season_id": 15103,
+      "is_placeholder": false
+    },
+    {
+      "id": 19711,
+      "legacy_id": 5181,
+      "name": "AFC Liverpool",
+      "short_code": null,
+      "twitter": null,
+      "country_id": 462,
+      "national_team": false,
+      "founded": null,
+      "logo_path": "https://cdn.sportmonks.com/images/soccer/teams/31/19711.png",
+      "venue_id": null,
+      "current_season_id": 19829,
+      "is_placeholder": false
+    },
+    {
+      "id": 58128,
+      "legacy_id": null,
+      "name": "Liverpool U19",
+      "short_code": "LIV",
+      "twitter": null,
+      "country_id": 462,
+      "national_team": false,
+      "founded": null,
+      "logo_path": "https://cdn.sportmonks.com/images/soccer/teams/16/58128.png",
+      "venue_id": null,
+      "current_season_id": 15060,
+      "is_placeholder": false
+    },
+    {
+      "id": 128512,
+      "legacy_id": null,
+      "name": "City of Liverpool",
+      "short_code": null,
+      "twitter": null,
+      "country_id": 462,
+      "national_team": false,
+      "founded": null,
+      "logo_path": "https://cdn.sportmonks.com/images/soccer/teams/0/128512.png",
+      "venue_id": 338827,
+      "current_season_id": 20097,
+      "is_placeholder": false
+    },
+    {
+      "id": 132724,
+      "legacy_id": null,
+      "name": "Liverpool U18",
+      "short_code": "LIV",
+      "twitter": null,
+      "country_id": 462,
+      "national_team": false,
+      "founded": 0,
+      "logo_path": "https://cdn.sportmonks.com/images/soccer/teams/20/132724.png",
+      "venue_id": null,
+      "current_season_id": 20230,
+      "is_placeholder": false
+    },
+    {
+      "id": 132874,
+      "legacy_id": null,
+      "name": "Liverpool W",
+      "short_code": "LIV",
+      "twitter": null,
+      "country_id": 462,
+      "national_team": false,
+      "founded": null,
+      "logo_path": "https://cdn.sportmonks.com/images/soccer/teams/10/132874.png",
+      "venue_id": null,
+      "current_season_id": 19989,
+      "is_placeholder": false
+    },
+    {
+      "id": 236667,
+      "legacy_id": null,
+      "name": "Liverpool U21",
+      "short_code": null,
+      "twitter": null,
+      "country_id": 462,
+      "national_team": false,
+      "founded": null,
+      "logo_path": "https://cdn.sportmonks.com/images/soccer/teams/27/236667.png",
+      "venue_id": null,
+      "current_season_id": 20244,
+      "is_placeholder": false
+    },
+    {
+      "id": 238848,
+      "legacy_id": null,
+      "name": "Liverpool Feds W",
+      "short_code": null,
+      "twitter": null,
+      "country_id": 462,
+      "national_team": false,
+      "founded": null,
+      "logo_path": "https://cdn.sportmonks.com/images/soccer/teams/0/238848.png",
+      "venue_id": null,
+      "current_season_id": 20149,
+      "is_placeholder": false
+    }
+  ],
+  "meta": {
+    "sports": [
+      {
+        "id": 1,
+        "name": "Soccer",
+        "current": true
+      }
+    ]
+  }
+}
