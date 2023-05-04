@@ -1,22 +1,19 @@
 package com.example.football_aggregator.entity;
 
-
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@ToString
+@AllArgsConstructor
 public class Team {
+
+    private Long id;
 
     private String name;
 
     private String country;
 
-    private String code;
-
-
+    private int founded;
 }
