@@ -5,6 +5,7 @@ import com.example.football_aggregator.entity.*;
 import com.example.football_aggregator.api.TeamClient;
 import com.example.football_aggregator.dto.ResponseTeam;
 import com.example.football_aggregator.mappers.FootballTeamMapper;
+import com.example.football_aggregator.model.MatchTeamsId;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -26,12 +27,16 @@ public class TeamServiceImpl implements TeamService {
 
         List<? extends ResponseApiTeam> collectResult = new ArrayList<>();
 
+        Map<TeamKey,List<ResponseApiTeam>> hashMapTeam = new HashMap<>();
 
         for (TeamClient teamClient1 : teamClient) {
             List<? extends ResponseApiTeam> team = teamClient1.getTeam(param);
             collect.addAll(team);
-            collectResult = getTeamCompare(collect);
         }
+
+        hashMapTeam = matchTeam(collect);
+
+        hashMapTeam.forEach(this::saveMatchedTeamsIdApi);
 
 
         List<ResponseTeam> responseTeams = collectResult.stream()
@@ -43,23 +48,54 @@ public class TeamServiceImpl implements TeamService {
     }
 
 
-    private List<? extends ResponseApiTeam> getTeamCompare(List<? extends ResponseApiTeam> list){
 
-        List<ResponseApiTeam> responseApiTeams = new ArrayList<>();
+    private Map<TeamKey,List<ResponseApiTeam>> matchTeam(List<ResponseApiTeam> listTeam){
 
-        for (int i = 0; i<list.size();i++){
-            for (int j = i+1; j<list.size();j++){
-                if(list.get(i).getTeamFounded() == list.get(j).getTeamFounded() &&
-                        list.get(i).getTeamName().equals(list.get(j).getTeamName())&&
-                        list.get(i).getTeamFounded() != 0 &&
-                        list.get(j).getTeamFounded() != 0){
-                    responseApiTeams.add(list.get(i));
-                    responseApiTeams.add(list.get(j));
-                }
+        Map<TeamKey,List<ResponseApiTeam>> hashApiTeam = new HashMap<>();
+
+        for (ResponseApiTeam responseApiTeam:
+             listTeam) {
+
+            TeamKey teamKey = responseApiTeam.getTeamKey();
+
+            List<ResponseApiTeam> responseApiTeamList = hashApiTeam.putIfAbsent(teamKey,new ArrayList<>());
+
+            if(Objects.isNull(responseApiTeamList)){
+                hashApiTeam.get(teamKey).add(responseApiTeam);
+            }else {
+                responseApiTeamList.add(responseApiTeam);
             }
         }
 
-        return responseApiTeams;
+//        hashApiTeam.forEach((k,v)-> System.out.println("Key----->: " + k + " "+"value------->: "+v));
+
+        return hashApiTeam;
+    }
+
+    private void saveMatchedTeamsIdApi(TeamKey teamKey, List<ResponseApiTeam> listResponseApiTeams){
+
+        MatchTeamsId.MatchTeamsIdBuilder builder = MatchTeamsId.builder();
+
+        for (ResponseApiTeam team:
+             listResponseApiTeams) {
+            if(team instanceof ApiFootballResponseApiTeam){
+                builder.apiFootballResponseId(((ApiFootballResponseApiTeam) team).getTeam().getId());
+            }else if(team instanceof FootballProResponseApiTeam){
+                builder.footballProResponseId(((FootballProResponseApiTeam) team).getId());
+            }
+            builder.teamKey(teamKey);
+        }
+
+        MatchTeamsId matchTeamsId = builder.build();
+
+        List<MatchTeamsId> responseApiTeamList = new ArrayList<>();
+
+        if(matchTeamsId.getApiFootballResponseId() != null && matchTeamsId.getFootballProResponseId() != null){
+
+            responseApiTeamList.add(matchTeamsId);
+
+            System.out.println(responseApiTeamList);
+        }
     }
 
 }
