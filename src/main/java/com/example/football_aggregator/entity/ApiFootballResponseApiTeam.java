@@ -5,7 +5,6 @@ import lombok.*;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class ApiFootballResponseApiTeam implements ResponseApiTeam{
 
     private Team team;
@@ -20,5 +19,10 @@ public class ApiFootballResponseApiTeam implements ResponseApiTeam{
     @Override
     public int getTeamFounded() {
         return team.getFounded();
+    }
+
+    @Override
+    public TeamKey getTeamKey() {
+        return new TeamKey(team.getName(),team.getFounded());
     }
 }

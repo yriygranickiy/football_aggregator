@@ -6,4 +6,6 @@ public interface ResponseApiTeam {
     String getTeamName();
 
     int getTeamFounded();
+
+    TeamKey getTeamKey();
 }

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class FootballProResponseApiTeam implements ResponseApiTeam{
 
@@ -31,6 +30,11 @@ public class FootballProResponseApiTeam implements ResponseApiTeam{
     @Override
     public int getTeamFounded() {
         return founded;
+    }
+
+    @Override
+    public TeamKey getTeamKey() {
+        return new TeamKey(name,founded);
     }
 
 
