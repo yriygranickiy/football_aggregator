@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class FootballProResponseApiTeam implements ResponseApiTeam{
+public class FootballProResponseApiTeam {
 
     private Long id;
 
@@ -22,20 +22,25 @@ public class FootballProResponseApiTeam implements ResponseApiTeam{
 
     private int founded;
 
-    @Override
-    public String getTeamName() {
-        return name;
-    }
-
-    @Override
-    public int getTeamFounded() {
-        return founded;
-    }
-
-    @Override
-    public TeamKey getTeamKey() {
-        return new TeamKey(name,founded);
-    }
+//    @Override
+//    public String getTeamName() {
+//        return name;
+//    }
+//
+//    @Override
+//    public int getTeamFounded() {
+//        return founded;
+//    }
+//
+//    @Override
+//    public TeamKey getTeamKey() {
+//        return new TeamKey(name,founded);
+//    }
+//
+//    @Override
+//    public Long getIdTeam() {
+//        return id;
+//    }
 
 
 }

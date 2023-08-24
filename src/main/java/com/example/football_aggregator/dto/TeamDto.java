@@ -1,21 +1,18 @@
 package com.example.football_aggregator.dto;
 
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseTeam {
-
-    private Long id;
+public class TeamDto {
 
     private String name;
 
     private String country;
 
     private int founded;
-
-    private Stadium stadium;
 
 }

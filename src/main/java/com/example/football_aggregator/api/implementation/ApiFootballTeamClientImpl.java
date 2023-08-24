@@ -1,8 +1,10 @@
 package com.example.football_aggregator.api.implementation;
 
 
+import com.example.football_aggregator.api.CoachClient;
 import com.example.football_aggregator.api.FootballApiClient;
-import com.example.football_aggregator.entity.ApiFootballResponseApiTeam;
+import com.example.football_aggregator.entity.ApiFootball.Coach;
+import com.example.football_aggregator.entity.ApiFootball.ApiFootballResponseApiTeam;
 import com.example.football_aggregator.entity.ResponseApiTeam;
 import com.example.football_aggregator.exception.ApiRequestException;
 import com.example.football_aggregator.utill.UtillitiesParam;
@@ -22,7 +24,7 @@ import java.util.Objects;
 
 
 @SuperBuilder
-public class ApiFootballTeamClientImpl extends FootballApiClient {
+public class ApiFootballTeamClientImpl extends FootballApiClient implements CoachClient {
 
     @Override
     public List<? extends ResponseApiTeam> getTeam(Map<String,String> param){
@@ -72,5 +74,44 @@ public class ApiFootballTeamClientImpl extends FootballApiClient {
                 .build();
     }
 
+    @Override
+    public List<Coach> getCoach(String id){
 
+        String result = "";
+
+        String responseList = "";
+
+        List<Coach> coachList = new ArrayList<>();
+
+        Request request = buildRequest(UtillitiesParam
+                .buildQueryParamById(id));
+
+        try{
+
+            Response response = client.newCall(request).execute();
+
+            result = Objects.requireNonNull(response.body()).string();
+
+            ObjectMapper mapper = new ObjectMapper();
+
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+            JsonNode node = mapper.readTree(result);
+
+            responseList = node.path("response").toString();
+
+            coachList = mapper.readValue(responseList, new TypeReference<List<Coach>>() {});
+
+            if(coachList.isEmpty()){
+                throw new ApiRequestException("this team not found");
+            }else {
+                return coachList;
+            }
+        }catch (IOException e){
+            e.getMessage();
+
+        }
+        return coachList;
+
+    }
 }

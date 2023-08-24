@@ -1,4 +1,4 @@
-package com.example.football_aggregator.entity;
+package com.example.football_aggregator.entity.ApiFootball;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

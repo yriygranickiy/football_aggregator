@@ -8,4 +8,6 @@ public interface ResponseApiTeam {
     int getTeamFounded();
 
     TeamKey getTeamKey();
+
+    Long getIdTeam();
 }

@@ -1,7 +1,6 @@
 package com.example.football_aggregator.utill;
 
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class UtillitiesParam {
 
@@ -24,4 +23,23 @@ public class UtillitiesParam {
 
         return sb.toString();
     }
+
+    public static String buildParamById(String id,String include){
+
+        StringBuilder sb = new StringBuilder("/");
+
+        sb.append(id).append("?").append("include=").append(include);
+
+        return sb.toString();
+    }
+
+    public static String buildQueryParamById(String id){
+
+        StringBuilder sb = new StringBuilder("/");
+
+        sb.append("coachs?").append("team=").append(id);
+
+        return sb.toString();
+    }
+
 }
