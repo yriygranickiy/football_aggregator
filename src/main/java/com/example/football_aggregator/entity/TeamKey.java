@@ -1,9 +1,7 @@
 package com.example.football_aggregator.entity;
 
-import com.example.football_aggregator.model.MatchTeamsId;
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
 import java.util.Objects;
 
 
@@ -24,9 +22,6 @@ public class TeamKey {
 
     @NonNull
     private int founded;
-
-    @OneToOne(mappedBy = "teamKey")
-    private MatchTeamsId matchTeamsId;
 
 
     @Override
