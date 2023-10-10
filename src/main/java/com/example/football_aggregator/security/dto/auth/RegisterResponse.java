@@ -1,4 +1,4 @@
-package com.example.football_aggregator.security.dto;
+package com.example.football_aggregator.security.dto.auth;
 
 
 import lombok.AllArgsConstructor;
@@ -12,13 +12,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AuthenticationResponse {
+public class RegisterResponse {
+
 
     private String name;
 
-    private Date date;
-
     private String token;
 
-    private String role;
+    private Date data;
 }

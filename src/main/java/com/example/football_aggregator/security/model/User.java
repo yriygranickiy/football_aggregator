@@ -34,7 +34,7 @@ public class User implements UserDetails {
 
     private String lastname;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -43,6 +43,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+
         for (Role role: roles){
             List<SimpleGrantedAuthority> collect = role.getPrivileges().stream()
                     .map(p -> new SimpleGrantedAuthority(p.getName())).toList();
@@ -53,18 +54,13 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
     public String getUsername() {
         return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override

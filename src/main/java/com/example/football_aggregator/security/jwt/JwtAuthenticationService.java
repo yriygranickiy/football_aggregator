@@ -1,9 +1,9 @@
 package com.example.football_aggregator.security.jwt;
 
-import com.example.football_aggregator.security.dto.AuthenticationRequest;
-import com.example.football_aggregator.security.dto.AuthenticationResponse;
-import com.example.football_aggregator.security.dto.RegisterRequest;
-import com.example.football_aggregator.security.dto.RegisterResponse;
+import com.example.football_aggregator.security.dto.auth.AuthenticationRequest;
+import com.example.football_aggregator.security.dto.auth.AuthenticationResponse;
+import com.example.football_aggregator.security.dto.auth.RegisterRequest;
+import com.example.football_aggregator.security.dto.auth.RegisterResponse;
 import com.example.football_aggregator.security.model.Role;
 import com.example.football_aggregator.security.model.User;
 import com.example.football_aggregator.security.repository.RoleRepository;
@@ -35,7 +35,7 @@ public class JwtAuthenticationService {
 
     @Transactional
     public RegisterResponse register(RegisterRequest request){
-        User user = User.builder()
+        var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .email(request.getEmail())

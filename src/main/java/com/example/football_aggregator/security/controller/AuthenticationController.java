@@ -1,9 +1,9 @@
 package com.example.football_aggregator.security.controller;
 
-import com.example.football_aggregator.security.dto.AuthenticationRequest;
-import com.example.football_aggregator.security.dto.AuthenticationResponse;
-import com.example.football_aggregator.security.dto.RegisterRequest;
-import com.example.football_aggregator.security.dto.RegisterResponse;
+import com.example.football_aggregator.security.dto.auth.AuthenticationRequest;
+import com.example.football_aggregator.security.dto.auth.AuthenticationResponse;
+import com.example.football_aggregator.security.dto.auth.RegisterRequest;
+import com.example.football_aggregator.security.dto.auth.RegisterResponse;
 import com.example.football_aggregator.security.jwt.JwtAuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

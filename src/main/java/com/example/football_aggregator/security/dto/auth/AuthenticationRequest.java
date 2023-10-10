@@ -1,5 +1,4 @@
-package com.example.football_aggregator.security.dto;
-
+package com.example.football_aggregator.security.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,13 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RegisterRequest {
-
-    private String firstname;
-
-    private String lastname;
+public class AuthenticationRequest {
 
     private String email;
 
     private String password;
+
 }
