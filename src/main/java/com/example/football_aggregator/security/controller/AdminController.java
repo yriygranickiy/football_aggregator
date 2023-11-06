@@ -4,6 +4,7 @@ import com.example.football_aggregator.security.dto.UserDto;
 import com.example.football_aggregator.security.model.Privilege;
 import com.example.football_aggregator.security.model.Role;
 import com.example.football_aggregator.security.service.AdminService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/admin")
+@SecurityRequirement(name="bearerAuth")
 public class AdminController {
 
     private final AdminService adminService;
