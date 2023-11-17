@@ -1,5 +1,6 @@
 package com.example.football_aggregator.security.service;
 
+import com.example.football_aggregator.exception.ApiRequestException;
 import com.example.football_aggregator.security.dto.UserDto;
 import com.example.football_aggregator.security.mapper.UserMapper;
 import com.example.football_aggregator.security.model.Privilege;
@@ -12,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class ImplAdminService implements AdminService{
@@ -22,12 +25,14 @@ public class ImplAdminService implements AdminService{
 
     private final UserRepository userRepository;
 
-    private final UserMapper userMapper;
-
-
     @Override
     public Privilege savePrivilege(Privilege privilegeName) {
 
+        boolean existPrivilegeName = privilegeRepository.existsByName(privilegeName.getName());
+
+        if(existPrivilegeName){
+            throw new ApiRequestException("Privilege this name: "+privilegeName.getName() +"is exist");
+        }
         Privilege privilege = Privilege.builder()
                 .name(privilegeName.getName())
                 .build();
@@ -37,6 +42,12 @@ public class ImplAdminService implements AdminService{
 
     @Override
     public Role saveRole(Role roleName) {
+
+        boolean existRoleName = roleRepository.existsByName(roleName.getName());
+        if(existRoleName){
+            throw  new ApiRequestException("This role "+roleName.getName()+" is exist");
+        }
+
         Role role = Role.builder()
                 .name(roleName.getName())
                 .build();
@@ -44,13 +55,13 @@ public class ImplAdminService implements AdminService{
     }
 
     @Override
-    public UserDto getUserById(Long id) {
-        return userMapper.map(userRepository.findById(id)
+    public UserDto getUserById(UUID id) {
+        return UserMapper.INSTANCE.mapToDto(userRepository.findById(id)
                 .orElseThrow(()-> new UsernameNotFoundException("not found user!")));
     }
 
     @Override
-    public UserDto updateUser(UserDto user, Long id) {
+    public UserDto updateUser(UserDto user, UUID id) {
         //find user
         User user1 = userRepository.findById(id).orElseThrow(()
                 -> new UsernameNotFoundException("not found"));
@@ -63,7 +74,7 @@ public class ImplAdminService implements AdminService{
 
         userRepository.save(user1);
         //convert to dto and return
-        return userMapper.map(user1);
+         return UserMapper.INSTANCE.mapToDto(user1);
 
     }
 

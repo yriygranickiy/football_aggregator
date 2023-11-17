@@ -14,7 +14,6 @@ import java.util.Date;
 @Builder
 public class RegisterResponse {
 
-
     private String name;
 
     private String token;

@@ -1,10 +1,10 @@
 package com.example.football_aggregator.security.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 public class Privilege {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String name;
 }

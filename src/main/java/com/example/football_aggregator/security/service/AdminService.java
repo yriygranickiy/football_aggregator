@@ -3,6 +3,9 @@ package com.example.football_aggregator.security.service;
 import com.example.football_aggregator.security.dto.UserDto;
 import com.example.football_aggregator.security.model.Privilege;
 import com.example.football_aggregator.security.model.Role;
+import com.example.football_aggregator.security.model.User;
+
+import java.util.UUID;
 
 public interface AdminService {
 
@@ -10,8 +13,8 @@ public interface AdminService {
 
     Role saveRole(Role roleName);
 
-    UserDto getUserById(Long id);
+    UserDto getUserById(UUID id);
 
-    UserDto updateUser(UserDto user, Long id);
+    UserDto updateUser(UserDto user, UUID id);
 
 }

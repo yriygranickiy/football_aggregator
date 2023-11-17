@@ -3,6 +3,7 @@ package com.example.football_aggregator.security.controller;
 import com.example.football_aggregator.security.dto.UserDto;
 import com.example.football_aggregator.security.model.Privilege;
 import com.example.football_aggregator.security.model.Role;
+import com.example.football_aggregator.security.model.User;
 import com.example.football_aggregator.security.service.AdminService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,7 +38,7 @@ public class AdminController {
 
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping("/user")
-    public ResponseEntity<UserDto> getUserById(@RequestParam(name = "id") Long id){
+    public ResponseEntity<UserDto> getUserById(@RequestParam(name = "id") UUID id){
         return new ResponseEntity<>(adminService.getUserById(id),HttpStatus.OK);
     }
 
@@ -43,7 +46,7 @@ public class AdminController {
     @PreAuthorize("hasAuthority('UPDATE_USER')")
     @PutMapping("/update-user")
     public ResponseEntity<UserDto> updateUser
-            (@RequestBody UserDto user,@RequestParam(name="id") Long id){
+            (@RequestBody UserDto user, @RequestParam(name="id") UUID id){
         return new ResponseEntity<>(adminService.updateUser(user,id),HttpStatus.OK);
     }
 }
