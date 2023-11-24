@@ -10,7 +10,6 @@ import com.example.football_aggregator.security.repository.PrivilegeRepository;
 import com.example.football_aggregator.security.repository.RoleRepository;
 import com.example.football_aggregator.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -31,7 +30,7 @@ public class ImplAdminService implements AdminService{
         boolean existPrivilegeName = privilegeRepository.existsByName(privilegeName.getName());
 
         if(existPrivilegeName){
-            throw new ApiRequestException("Privilege this name: "+privilegeName.getName() +"is exist");
+            throw new ApiRequestException("Privilege this name: "+privilegeName.getName() +" is exist");
         }
         Privilege privilege = Privilege.builder()
                 .name(privilegeName.getName())
@@ -57,14 +56,14 @@ public class ImplAdminService implements AdminService{
     @Override
     public UserDto getUserById(UUID id) {
         return UserMapper.INSTANCE.mapToDto(userRepository.findById(id)
-                .orElseThrow(()-> new UsernameNotFoundException("not found user!")));
+                .orElseThrow(()-> new ApiRequestException("not found user with id: "+id)));
     }
 
     @Override
     public UserDto updateUser(UserDto user, UUID id) {
         //find user
         User user1 = userRepository.findById(id).orElseThrow(()
-                -> new UsernameNotFoundException("not found"));
+                -> new ApiRequestException("not found"));
 
         //update user
         user1.setEmail(user.getEmail());
