@@ -23,8 +23,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.within;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.will;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -122,15 +124,17 @@ class ImplAdminServiceTest {
         assertEquals("Hranitskyi", userDto.getLastname());
     }
 
-//    @Test
-//    void should_get_exception_if_user_not_found() {
-//
-//        when(userRepository.findById(UUID.randomUUID())).thenReturn(null);
-//
-//        assertThrows(ApiRequestException.class, ()->{
-//            service.getUserById(UUID.randomUUID());
-//        });
-//    }
+    @Test
+    void should_get_exception_if_user_not_found() {
+
+        UUID userId = UUID.randomUUID();
+
+        doThrow(new ApiRequestException("not found user with id: "+ userId))
+                .when(userRepository)
+                        .findById(userId);
+
+        assertThrows(ApiRequestException.class,()->service.getUserById(userId));
+    }
 
     @Test
     void should_update_user() {
